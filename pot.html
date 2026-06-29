@@ -1,0 +1,740 @@
+
+
+Bhakthi portfolio · HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhakthi S P — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --ink: #1a1a2e;
+    --ink-soft: #4a4a6a;
+    --ink-muted: #8a8aaa;
+    --page: #f7f6f2;
+    --card: #ffffff;
+    --violet: #6c5ce7;
+    --violet-light: #ede9ff;
+    --violet-mid: #a29bfe;
+    --teal: #00b894;
+    --teal-light: #e0faf3;
+    --coral: #e17055;
+    --amber: #fdcb6e;
+    --border: rgba(108,92,231,0.12);
+    --border-soft: rgba(0,0,0,0.07);
+    --shadow: 0 2px 20px rgba(108,92,231,0.08);
+    --radius: 16px;
+    --radius-sm: 8px;
+  }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--page);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+ 
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(247,246,242,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); text-decoration: none; margin-right: 3rem; white-space: nowrap; }
+  .nav-links { display: flex; gap: 2rem; margin-left: 2rem; }
+  .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--violet); }
+ 
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  }
+  .hero-blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.18;
+  }
+  .hero-blob-1 { width: 600px; height: 600px; background: var(--violet); top: -100px; right: -100px; }
+  .hero-blob-2 { width: 400px; height: 400px; background: var(--teal); bottom: -50px; left: 10%; }
+  .hero-content { position: relative; z-index: 1; max-width: 720px; }
+ 
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--violet); margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--violet); }
+ 
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: var(--ink); margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: italic; color: var(--violet); }
+ 
+  .hero-sub {
+    font-size: 1.15rem; color: var(--ink-soft); max-width: 520px;
+    margin-bottom: 2.5rem; line-height: 1.7;
+  }
+ 
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+ 
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.9rem 2rem; border-radius: 100px;
+    background: var(--violet); color: #fff;
+    font-size: 0.9rem; font-weight: 600; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(108,92,231,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(108,92,231,0.45); }
+ 
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.9rem 2rem; border-radius: 100px;
+    border: 1.5px solid var(--border);
+    color: var(--ink-soft); font-size: 0.9rem; font-weight: 500; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--violet); color: var(--violet); }
+ 
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem; padding-top: 3rem;
+    border-top: 1px solid var(--border-soft);
+  }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--ink); }
+  .stat-label { font-size: 0.8rem; color: var(--ink-muted); font-weight: 500; letter-spacing: 0.04em; }
+ 
+  /* ── SECTION SHELL ── */
+  section { padding: 6rem 3rem; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--violet); margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.1; color: var(--ink); margin-bottom: 1rem;
+  }
+  .section-intro { font-size: 1.05rem; color: var(--ink-soft); max-width: 520px; margin-bottom: 3.5rem; line-height: 1.7; }
+ 
+  /* ── SKILLS ── */
+  #skills { background: var(--ink); }
+  #skills .section-label { color: var(--violet-mid); }
+  #skills h2 { color: #fff; }
+  #skills .section-intro { color: rgba(255,255,255,0.55); }
+ 
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+  .skill-chip {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;
+    padding: 0.9rem 1rem; border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.2s, border-color 0.2s;
+    cursor: default; min-height: 80px; justify-content: space-between;
+  }
+  .skill-chip:hover { background: rgba(108,92,231,0.2); border-color: rgba(108,92,231,0.5); }
+  .skill-icon { font-size: 1.2rem; }
+  .skill-name { font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.85); line-height: 1.3; word-break: break-word; }
+  .skill-level {
+    font-size: 0.65rem; font-family: 'DM Mono', monospace;
+    color: var(--violet-mid); letter-spacing: 0.04em; text-transform: uppercase;
+  }
+ 
+  /* ── PROJECTS ── */
+  #projects { background: var(--page); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--card); border-radius: var(--radius);
+    padding: 2rem; border: 1px solid var(--border-soft);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--violet), var(--violet-mid));
+  }
+  .project-tag {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.25rem 0.75rem; border-radius: 100px;
+    background: var(--violet-light); color: var(--violet);
+    margin-bottom: 1rem;
+  }
+  .project-title { font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; }
+  .project-desc { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.65; margin-bottom: 1.25rem; }
+  .project-skills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+  .project-skill {
+    font-size: 0.72rem; font-weight: 500;
+    padding: 0.2rem 0.6rem; border-radius: 4px;
+    background: var(--page); color: var(--ink-soft);
+    border: 1px solid var(--border-soft);
+  }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.8rem; font-weight: 600; color: var(--violet); text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .project-link:hover { gap: 0.65rem; }
+  .project-link svg { width: 14px; height: 14px; }
+ 
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--page); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px;
+    background: var(--border);
+  }
+  .timeline-item { padding-left: 2.5rem; position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -5px; top: 8px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--violet); border: 2px solid var(--page);
+  }
+  .timeline-date { font-size: 0.78rem; font-family: 'DM Mono', monospace; color: var(--ink-muted); margin-bottom: 0.4rem; }
+  .timeline-role { font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; }
+  .timeline-org { font-size: 0.875rem; color: var(--violet); font-weight: 500; margin-bottom: 0.6rem; }
+  .timeline-body { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.65; }
+ 
+  /* ── ACHIEVEMENTS ── */
+  #achievements { background: var(--ink); color: #fff; }
+  #achievements .section-label { color: var(--amber); }
+  #achievements h2 { color: #fff; }
+  #achievements .section-intro { color: rgba(255,255,255,0.55); }
+ 
+  .achievements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+  .achievement-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius); padding: 1.75rem;
+    transition: background 0.2s; position: relative;
+  }
+  .achievement-card:hover { background: rgba(255,255,255,0.07); }
+  .achievement-badge {
+    width: 44px; height: 44px; border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 1rem;
+  }
+  .badge-gold { background: rgba(253,203,110,0.15); }
+  .badge-violet { background: rgba(108,92,231,0.2); }
+  .badge-teal { background: rgba(0,184,148,0.15); }
+  .badge-coral { background: rgba(225,112,85,0.15); }
+  .achievement-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem; }
+  .achievement-body { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+ 
+  /* ── EDUCATION ── */
+  #education { background: var(--page); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border-soft); border-radius: var(--radius);
+    padding: 1.75rem; transition: box-shadow 0.2s;
+  }
+  .edu-card:hover { box-shadow: var(--shadow); }
+  .edu-degree { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; }
+  .edu-school { font-size: 0.85rem; color: var(--violet); font-weight: 500; margin-bottom: 0.5rem; }
+  .edu-meta { display: flex; justify-content: space-between; align-items: center; }
+  .edu-year { font-size: 0.75rem; font-family: 'DM Mono', monospace; color: var(--ink-muted); }
+  .edu-score {
+    font-size: 0.78rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 100px;
+    background: var(--teal-light); color: var(--teal);
+  }
+ 
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--violet); color: #fff;
+    text-align: center; padding: 7rem 3rem;
+  }
+  #contact h2 { color: #fff; margin-bottom: 0.75rem; }
+  #contact .section-intro { color: rgba(255,255,255,0.7); margin: 0 auto 2.5rem; }
+  .contact-links { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.75rem; border-radius: 100px;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; font-size: 0.875rem; font-weight: 500; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.22); }
+ 
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); padding: 2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-name { font-family: 'DM Serif Display', serif; font-size: 1rem; color: rgba(255,255,255,0.6); }
+  .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+ 
+  /* ── PROFILE PHOTO ── */
+  .hero-profile {
+    width: 200px; height: 200px; border-radius: 20px;
+    background: linear-gradient(135deg, var(--violet), var(--violet-light));
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 2rem; position: relative; z-index: 1;
+    border: 3px solid var(--card); box-shadow: 0 10px 40px rgba(108,92,231,0.3);
+    overflow: hidden;
+  }
+  .hero-profile img {
+    width: 100%; height: 100%; object-fit: contain; object-position: center top; background: #fff;
+  }
+  .hero-profile-placeholder {
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; background: linear-gradient(135deg, #e0d7ff, #f5f3ff);
+  }
+
+  /* ── CERTIFICATIONS ── */
+  #certifications { background: var(--page); }
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+  .cert-card {
+    background: var(--card); border: 1px solid var(--border-soft); border-radius: var(--radius);
+    padding: 1.5rem; transition: box-shadow 0.2s; position: relative;
+    border-left: 4px solid var(--teal);
+  }
+  .cert-card:hover { box-shadow: var(--shadow); }
+  .cert-card.machine-learning { border-left-color: var(--violet); }
+  .cert-card.python { border-left-color: var(--coral); }
+  .cert-card.analytics { border-left-color: var(--amber); }
+  .cert-icon {
+    font-size: 1.8rem; margin-bottom: 0.5rem;
+  }
+  .cert-title { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; }
+  .cert-provider { font-size: 0.82rem; color: var(--violet); font-weight: 500; margin-bottom: 0.4rem; }
+  .cert-score { font-size: 0.78rem; color: var(--ink-soft); }
+
+  /* ── ACTIVITIES ── */
+  #activities { background: var(--ink); color: #fff; }
+  #activities .section-label { color: var(--violet-mid); }
+  #activities h2 { color: #fff; }
+  #activities .section-intro { color: rgba(255,255,255,0.55); }
+  
+  .activities-container {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;
+  }
+  .activity-subsection h3 {
+    font-size: 1.2rem; font-weight: 600; color: var(--amber); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .activity-list {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .activity-item {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-sm); padding: 1.25rem;
+    transition: background 0.2s;
+  }
+  .activity-item:hover { background: rgba(108,92,231,0.15); }
+  .activity-item-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem; }
+  .activity-item-org { font-size: 0.82rem; color: var(--violet-mid); margin-bottom: 0.4rem; }
+  .activity-item-detail { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  /* ── INTERESTS ── */
+  #interests { background: var(--page); }
+  .interests-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+  .interest-item {
+    background: var(--violet-light); color: var(--violet);
+    padding: 1.5rem; border-radius: var(--radius-sm);
+    text-align: center; font-weight: 500; font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .interest-item:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(108,92,231,0.15); }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-stats { gap: 1.5rem; }
+    .hero-profile { width: 150px; height: 150px; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .activities-container { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Bhakthi S P</a>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#activities">Activities</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+  </div>
+  <div class="hero-content">
+    <!-- Profile Photo -->
+    <div class="hero-profile">
+      <img src="passport_Bhakthi.jpeg" alt="Bhakthi S P">
+    </div>
+    
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Computer Science &amp; Engineering · RNSIT · Batch of 2027
+    </div>
+    <h1>Data meets<br><em>intelligence.</em></h1>
+    <p class="hero-sub">
+      I'm Bhakthi — a CS student at RNS Institute of Technology specialising in data analytics, AI systems, and building software that solves real problems.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">
+        View my work
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="mailto:bhakthisp23cs@rnsit.ac.in" class="btn-ghost">Get in touch</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-value">9.09</div>
+        <div class="stat-label">CGPA</div>
+      </div>
+      <div>
+        <div class="stat-value">5+</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div>
+        <div class="stat-value">4×</div>
+        <div class="stat-label">Hackathon finalist</div>
+      </div>
+      <div>
+        <div class="stat-value">96%</div>
+        <div class="stat-label">PU score</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical stack</div>
+  <h2>What I work with</h2>
+  <p class="section-intro">From data wrangling to computer vision — tools I've applied across real projects and internships.</p>
+  <div class="skills-grid">
+    <div class="skill-chip"><span class="skill-icon">🐍</span><span class="skill-name">Python</span><span class="skill-level">Core</span></div>
+    <div class="skill-chip"><span class="skill-icon">🗄️</span><span class="skill-name">MySQL / SQL</span><span class="skill-level">Core</span></div>
+    <div class="skill-chip"><span class="skill-icon">📊</span><span class="skill-name">Pandas</span><span class="skill-level">Core</span></div>
+    <div class="skill-chip"><span class="skill-icon">🔢</span><span class="skill-name">NumPy</span><span class="skill-level">Core</span></div>
+    <div class="skill-chip"><span class="skill-icon">📈</span><span class="skill-name">Power BI</span><span class="skill-level">Proficient</span></div>
+    <div class="skill-chip"><span class="skill-icon">📋</span><span class="skill-name">Microsoft Excel</span><span class="skill-level">Proficient</span></div>
+    <div class="skill-chip"><span class="skill-icon">👁️</span><span class="skill-name">OpenCV</span><span class="skill-level">Applied</span></div>
+    <div class="skill-chip"><span class="skill-icon">🤖</span><span class="skill-name">Machine Learning</span><span class="skill-level">Learning</span></div>
+    <div class="skill-chip"><span class="skill-icon">🌐</span><span class="skill-name">HTML / CSS</span><span class="skill-level">Proficient</span></div>
+    <div class="skill-chip"><span class="skill-icon">⚙️</span><span class="skill-name">C++</span><span class="skill-level">Proficient</span></div>
+    <div class="skill-chip"><span class="skill-icon">🧮</span><span class="skill-name">MATLAB</span><span class="skill-level">Applied</span></div>
+    <div class="skill-chip"><span class="skill-icon">🗃️</span><span class="skill-name">DBMS</span><span class="skill-level">Proficient</span></div>
+  </div>
+</section>
+ 
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Work</div>
+  <h2>Projects I've built</h2>
+  <p class="section-intro">Each project started with a real problem — from retail inventory chaos to touchless human-computer interaction.</p>
+  <div class="projects-grid">
+ 
+    <div class="project-card">
+      <div class="project-tag">AI · Health Tech</div>
+      <div class="project-title">ShaktiCare AI — PCOD Risk Prediction</div>
+      <p class="project-desc">An AI-powered women's health platform that predicts early PCOD risk using a Digital Twin approach. Analyses menstrual patterns, symptoms, mood, and lifestyle for personalised insights and anonymous support.</p>
+      <div class="project-skills">
+        <span class="project-skill">Python</span><span class="project-skill">Machine Learning</span><span class="project-skill">Digital Twin</span>
+      </div>
+      <a href="https://shakthi-care-evfx.vercel.app/" target="_blank" class="project-link">
+        View live <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+ 
+    <div class="project-card">
+      <div class="project-tag">Data Analytics</div>
+      <div class="project-title">SmartStock — Inventory Optimisation</div>
+      <p class="project-desc">Developed during Infosys Springboard Virtual Internship. Analyses retail inventory data to optimise stock levels, reduce shortages, and surface demand patterns using Python and SQL.</p>
+      <div class="project-skills">
+        <span class="project-skill">Python</span><span class="project-skill">SQL</span><span class="project-skill">Pandas</span><span class="project-skill">Data Analysis</span>
+      </div>
+      <a href="https://github.com/bhakthisp/smartstock-retail-optimizer" target="_blank" class="project-link">
+        GitHub <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+ 
+    <div class="project-card">
+      <div class="project-tag">Computer Vision · AI</div>
+      <div class="project-title">AI Virtual Mouse</div>
+      <p class="project-desc">Touch-free computer control using hand gestures and voice commands. Uses MediaPipe and OpenCV for cursor movement, clicking, and scrolling — eliminating the need for physical peripherals.</p>
+      <div class="project-skills">
+        <span class="project-skill">OpenCV</span><span class="project-skill">MediaPipe</span><span class="project-skill">Speech Recognition</span>
+      </div>
+      <a href="https://github.com/bhakthisp/AI-virtual-mouse-using-hand-gestures-and-voice-commands.git" target="_blank" class="project-link">
+        GitHub <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+ 
+    <div class="project-card">
+      <div class="project-tag">Database</div>
+      <div class="project-title">Blood Bank Management System</div>
+      <p class="project-desc">A data-driven application that organises donor, recipient, and inventory information. Tracks blood availability and donation records to improve life-critical resource management.</p>
+      <div class="project-skills">
+        <span class="project-skill">MySQL</span><span class="project-skill">Data Visualisation</span><span class="project-skill">DBMS</span>
+      </div>
+    </div>
+ 
+    <div class="project-card">
+      <div class="project-tag">Data Science · Mathematics</div>
+      <div class="project-title">COVID-19 Interpolation Study</div>
+      <p class="project-desc">Applied curve fitting and interpolation techniques in MATLAB to predict pandemic trends. Received appreciation for analytical accuracy — and later won Best Project at PROP 2024.</p>
+      <div class="project-skills">
+        <span class="project-skill">MATLAB</span><span class="project-skill">Predictive Modelling</span><span class="project-skill">Data Visualisation</span>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <h2>Where I've worked</h2>
+  <p class="section-intro">Hands-on internship applying data analytics in a real industry context.</p>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">Nov 2025 — Jan 2026</div>
+      <div class="timeline-role">Data Analyst Intern</div>
+      <div class="timeline-org">Infosys Springboard · Virtual</div>
+      <p class="timeline-body">Worked on the SmartStock project — applying Python and SQL for inventory optimisation in retail stores. Strengthened data analysis, interpretation, and decision-support skills through real-world scenarios across a 10-week virtual internship.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">Recognition</div>
+  <h2>Highlights</h2>
+  <p class="section-intro">A few moments where the work got noticed.</p>
+  <div class="achievements-grid">
+    <div class="achievement-card">
+      <div class="achievement-badge badge-gold">🏆</div>
+      <div class="achievement-title">Best Project — PROP 2024</div>
+      <p class="achievement-body">Won Best Project at RNS Institute's Project Open House for the COVID-19 interpolation study.</p>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-badge badge-violet">🤖</div>
+      <div class="achievement-title">CodeQuest 2026 — Round 2</div>
+      <p class="achievement-body">Shortlisted among 2,000+ applicants across India for the Supervity AI Agent Builder Challenge.</p>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-badge badge-teal">👑</div>
+      <div class="achievement-title">Top 50 — Elite Her Hackathon</div>
+      <p class="achievement-body">Reached the Top 50 finals for ShaktiCare AI — an ML-powered women's health platform.</p>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-badge badge-coral">🌍</div>
+      <div class="achievement-title">Wildcard Finalist — Elite Hack 1.0</div>
+      <p class="achievement-body">Selected as Wildcard Finalist among 7,500+ participants across 900+ teams globally.</p>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-badge badge-violet">🥉</div>
+      <div class="achievement-title">Top 3 — Parichaya Fest</div>
+      <p class="achievement-body">Secured Top 3 position in the "Where is Waldo" event among 35+ participating teams.</p>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-badge badge-teal">🔟</div>
+      <div class="achievement-title">Top 10 Finalist — LUMINUS 2026</div>
+      <p class="achievement-body">Reached the final round of Tech Escape Quest at this national-level tech fest among 42 teams.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Education</div>
+  <h2>Academic background</h2>
+  <p class="section-intro">Consistently high marks across every stage of schooling.</p>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">B.E. — Computer Science &amp; Engineering</div>
+      <div class="edu-school">RNS Institute of Technology</div>
+      <div class="edu-meta">
+        <span class="edu-year">2023 — 2027</span>
+        <span class="edu-score">CGPA 9.09</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">12th — PUE Karnataka (PCMB)</div>
+      <div class="edu-school">Morarji Desai Science PU College, Chickamagaluru</div>
+      <div class="edu-meta">
+        <span class="edu-year">2023</span>
+        <span class="edu-score">96%</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">10th — KSEEB</div>
+      <div class="edu-school">Kitturu Rani Chennamma Residential School, Chickmagalur</div>
+      <div class="edu-meta">
+        <span class="edu-year">2021</span>
+        <span class="edu-score">98%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Credentials</div>
+  <h2>Certifications &amp; Assessments</h2>
+  <p class="section-intro">Formal validation of skills through recognised certification programs and assessments.</p>
+  <div class="cert-grid">
+    <div class="cert-card python">
+      <div class="cert-icon">🐍</div>
+      <div class="cert-title">Python for Data Science</div>
+      <div class="cert-provider">Infosys Springboard</div>
+      <div class="cert-score">Completed · 2025</div>
+    </div>
+    <div class="cert-card python">
+      <div class="cert-icon">🏆</div>
+      <div class="cert-title">Python Foundation Certification</div>
+      <div class="cert-provider">Infosys Springboard</div>
+      <div class="cert-score">Completed · 2025</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🌐</div>
+      <div class="cert-title">Demystifying Networks</div>
+      <div class="cert-provider">NPTEL — Prof. Sridhar Iyer, IIT Bombay</div>
+      <div class="cert-score">Score: 70/100 · 2024</div>
+    </div>
+    <div class="cert-card machine-learning">
+      <div class="cert-icon">🤖</div>
+      <div class="cert-title">Machine Learning — 8-week Course</div>
+      <div class="cert-provider">NPTEL (IIT Madras)</div>
+      <div class="cert-score">Score: 51/100 · Proctored exam · 2024</div>
+    </div>
+    <div class="cert-card analytics">
+      <div class="cert-icon">📊</div>
+      <div class="cert-title">Data Analytics Job Simulation</div>
+      <div class="cert-provider">Deloitte Australia · Forage</div>
+      <div class="cert-score">Excel, Power BI, PowerPoint · 2024</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🗄️</div>
+      <div class="cert-title">Database Management Essentials</div>
+      <div class="cert-provider">United Latino Students Association · Coursera</div>
+      <div class="cert-score">Completed · 2024</div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities">
+  <div class="section-label" style="color:var(--amber); justify-content:flex-start;">Involvement</div>
+  <h2>Co-Curricular &amp; Extra-Curricular</h2>
+  <p class="section-intro">Active participation in technical competitions, community initiatives, and personal growth activities.</p>
+  
+  <div class="activities-container">
+    <!-- Co-Curricular -->
+    <div class="activity-subsection">
+      <h3>🏅 Co-Curricular Activities</h3>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-item-title">WIZALYZE: Data Analysis &amp; Dashboard Challenge</div>
+          <div class="activity-item-org">Nitte Meenakshi Institute of Technology (NMIT), Bengaluru</div>
+          <div class="activity-item-detail">Participant in a competitive data analysis and visualization challenge.</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-item-title">Tech Escape Quest — Finalist (Top 10)</div>
+          <div class="activity-item-org">LUMINUS 2026 National-Level Tech Fest · RNS Institute of Technology</div>
+          <div class="activity-item-detail">Reached final round among 42 participating teams in a technical problem-solving challenge.</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-item-title">AI Foundry Architecture: Deep Dive Meetup</div>
+          <div class="activity-item-org">Microsoft Luxor Office, Bengaluru</div>
+          <div class="activity-item-detail">Attended technical meetup focused on AI architecture, industry discussions, and professional networking.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Extra-Curricular -->
+    <div class="activity-subsection">
+      <h3>🌟 Extra-Curricular Activities</h3>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-item-title">"Where is Waldo" Event — Top 3 Position</div>
+          <div class="activity-item-org">Parichaya College Fest</div>
+          <div class="activity-item-detail">Secured top 3 position among 35+ participating teams.</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-item-title">Stormwater Drain Audit Participant</div>
+          <div class="activity-item-org">Building a Resilient Bengaluru Campaign</div>
+          <div class="activity-item-detail">Contributed to citizen-led initiative documenting Bengaluru's stormwater drainage network and urban resilience. Received participation certificate.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERESTS -->
+<section id="interests">
+  <div class="section-label">Personal</div>
+  <h2>Interests &amp; Hobbies</h2>
+  <p class="section-intro">When I'm not coding, I enjoy creative pursuits and artistic expression.</p>
+  <div class="interests-grid">
+    <div class="interest-item">🎨 Art &amp; Crafts</div>
+    <div class="interest-item">✏️ Pencil Sketches</div>
+    <div class="interest-item">🖌️ Painting</div>
+    <div class="interest-item">💭 Creative Design</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label" style="color:rgba(255,255,255,0.6); justify-content:center;">Let's connect</div>
+  <h2>Open to internships</h2>
+  <p class="section-intro">I'm actively looking for Data Analyst and Software engineering opportunities. Drop me a message.</p>
+  <div class="contact-links">
+    <a href="mailto:bhakthispgowda13@gmail.com" class="contact-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email me
+    </a>
+    <a href="https://www.linkedin.com/in/bhakthisp" target="_blank" class="contact-link">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/bhakthisp" target="_blank" class="contact-link">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Bhakthi S P</span>
+  <span class="footer-copy">Chickamagaluru, Karnataka · bhakthispgowda13@gmail.com</span>
+</footer>
+ 
+</body>
+</html>
+ 
+
+
